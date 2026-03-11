@@ -1,0 +1,28 @@
+<%= if @current_admin do %>
+  <main class="admin-main-wrap">
+    <.flash flash={@flash} kind={:info} id="flash-info" />
+    <.flash flash={@flash} kind={:error} id="flash-error" />
+    {@inner_content}
+  </main>
+<% else %>
+  <%= if assigns[:hide_topbar] do %>
+    <main class={["auth-main", assigns[:home_gateway] && "auth-main-home"]}>
+      <.flash flash={@flash} kind={:info} id="flash-info" />
+      <.flash flash={@flash} kind={:error} id="flash-error" />
+      {@inner_content}
+    </main>
+  <% else %>
+    <header class="topbar">
+      <a href="/">Elixir Nawala</a>
+      <nav>
+        <a href="/admin/login">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <.flash flash={@flash} kind={:info} id="flash-info" />
+      <.flash flash={@flash} kind={:error} id="flash-error" />
+      {@inner_content}
+    </main>
+  <% end %>
+<% end %>
